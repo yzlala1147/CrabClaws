@@ -1,0 +1,73 @@
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  #  MySQL数据源
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/bachang?characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 123456
+    type: com.zaxxer.hikari.HikariDataSource
+
+    shiro:
+      rememberMe:
+        cipherKey: 823Cvv7bHVZlebvEnlZWfQ==
+
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      test-on-borrow: true
+      test-while-idle: true
+      timeout: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      filters: stat,wall
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      remove-abandoned: true
+      remove-abandoned-timeout: 1800
+      log-abandoned: true
+      web-stat-filter:
+        enabled: true
+      #        网站视图
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        reset-enable: false
+        #        注释掉下面两个 会变成未授权
+        login-username: admin
+        login-password: admin
+        #        允许非本地访问
+        allow: ""
+
+#日期格式
+jackson:
+date-format: yyyy-MM-dd HH:mm:ss
+time-zone: GMT+8
+#登录接口
+shiro:
+  loginUrl: /login
+
+
+springdoc:
+  api-docs:
+#    swagger未授权访问 将true 修改成false即可
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui
+  default-flat-param-object: true
+
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  # 这里表示暴露所有端点，实际可根据需求选择性暴露，比如只暴露健康检查端点 "health" 等
+        exclude: ''
+
+
+
